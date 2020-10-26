@@ -1,38 +1,37 @@
 package org.emp;
 
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
 
-//Employee PartTime Wages
+public class EmpDailyWages {
 
-public class EmpPartTime {
+	public static final int isFullTime = 1;
+	public static final int isPartTime = 0;
+	public static final int perHour = 20;
+	public static final int FullDayHour = 8;
+	static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner in = new Scanner(System.in);
-		int isFullTime = 1;
-		int isPartTime = 0;
-		int perHour = 20;
-		int FullDayHour = 8;
-		Random rn=new Random();
-		int rand=rn.nextInt(3);
-
-		if (rand == isPartTime) {
-			System.out.println("-------PartTime_Employee_Wages-------");
-			System.out.println("Enter no Days Employee Worked : ");
-			int day = in.nextInt();
-			int partTimeWages = (day * (FullDayHour / 2)) * perHour;
-			System.out.println("PartTime_Wages_for " + day + " days : " + partTimeWages + " Rs.");
-
-		} else if (rand == isFullTime) {
-			System.out.println("-------FullTime_Employee_Wages-------");
-			System.out.println("Enter no Days Employee Worked : ");
-			int day = in.nextInt();
-			int FullTimeWages = perHour * (FullDayHour * day);
-			System.out.println("PartTime_Wages_for " + day + " days : S" + FullTimeWages + " Rs.");
-		} else
-			System.out.println("Employee Absent..!!!!");
-		
-		in.close();
+		System.out.println("---------Employee_Wages-----------");
+		EmpDailyWages emp = new EmpDailyWages();
+		emp.CalEmpWages();
 	}
 
+	public void CalEmpWages() {
+		Random rn = new Random();
+		int rand = rn.nextInt(2);
+		int TotalWages = 0;
+		if (rand == isFullTime) {
+			System.out.println("Enter fullTimeDays Employee Worked : ");
+			int day = in.nextInt();
+			TotalWages = perHour * (FullDayHour * day);
+		} else if (rand == isPartTime) {
+			System.out.println("Enter partTimeDays Employee Worked : ");
+			int day = in.nextInt();
+			TotalWages = perHour * ((FullDayHour / 2) * day);
+			System.out.println("Total_Salary for " + day + " days : " + TotalWages + " Rs.");
+		} else
+			System.out.println("Employee is absent..!!!");
+		in.close();
+	}
 }
