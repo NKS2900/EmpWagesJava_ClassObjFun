@@ -1,63 +1,39 @@
-package org.emp;
+package com.Employee;
 
 import java.util.Random;
+import java.util.Scanner;
 
-public class EmpWagesTill {
+public class EmployeeFunction {
 
-	public static final int FullDayHour = 8;
-	public static final int WorkingDayMonth = 20;
-	public static final int maxHoursInMonth = 100;
-	public static final int perHour = 20;
-	
+	public static final int Is_Full_Time = 1;
+	public static final int Is_Part_Time = 0;
+	public static final int EmpRate_Hour = 20;
+	public static final int EmpHrs = 8;
+	static Scanner in = new Scanner(System.in);
+
 	public static void main(String[] args) {
+		System.out.println("---------Employee_Wages-----------");
 		
+		EmployeeFunction emp = new EmployeeFunction();
+		emp.CalEmployeeFunction();
+	}
 
-//Calculate Wages till a condition of total working hours or days is reached for a month - Assume 100 hours
-			
-		int fullTimeDays = 0;
-		int partTimeDays = 0;		
-		int totalempHour = 0;
-		int totalWorkingDay = 0;
-		int absent = 0;
-		
-
-		while (maxHoursInMonth > totalempHour && WorkingDayMonth > totalWorkingDay) {
-
-			totalWorkingDay++;
-			
-			Random rn = new Random();
-			int rand = rn.nextInt(3);
-
-			switch (rand) {
-
-			case 0:
-				fullTimeDays++;
-				totalempHour = totalempHour + FullDayHour;
-				break;
-			case 1:
-				partTimeDays++;
-				totalempHour = totalempHour + (FullDayHour / 2);
-				break;
-			default:
-				absent++;
-				break;
-
-			}
-		}
-		int FullTimeSalary = perHour * (FullDayHour * fullTimeDays);
-		int PartTimeSalary = (partTimeDays * (FullDayHour / 2)) * perHour;
-
-		System.out.println("------------Employee_Wages-------------");
-		System.out.println("---------------------------------------");
-		System.out.println("FullTime_Days_in_month: " + fullTimeDays);		
-		System.out.println("PartTime_Days_in_month: " + partTimeDays);		
-		System.out.println("Absent_Days_in_month: " + absent);
-		System.out.println("Total_working_Days_IN_month : " + (fullTimeDays + partTimeDays));
-		System.out.println("Total_Hours    :===> " + totalempHour);
-		System.out.println("FullTime_Salary:===> " + FullTimeSalary);
-		System.out.println("PartTime_Salary:===> " + PartTimeSalary);
-		System.out.println("Total_Salary   :===> " + (FullTimeSalary + PartTimeSalary));
-		System.out.println("---------------------------------------");
-		System.out.println(totalWorkingDay);
+	public void CalEmployeeFunction() {
+		Random rn = new Random();
+		int rand = rn.nextInt(2);
+		if (rand == Is_Full_Time) {
+			System.out.println("Enter fullTimeDays Employee Worked : ");
+			int day = in.nextInt();
+			int TotalWages = EmpRate_Hour * (EmpHrs * day);
+			System.out.println("Total_Salary for " + day + " days : " + TotalWages + " Rs.");
+		} 
+		else if(rand == Is_Part_Time) {
+			System.out.println("Enter partTimeDays Employee Worked : ");
+			int day = in.nextInt();
+			int TotalWages = EmpRate_Hour * ((EmpHrs/2) * day);
+			System.out.println("Total_Salary for " + day + " days : " + TotalWages + " Rs.");
+		}else
+			System.out.println("Employee is Absent & Salary is 0..!!!");
+		in.close();
 	}
 }
